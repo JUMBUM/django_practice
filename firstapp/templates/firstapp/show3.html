@@ -1,0 +1,22 @@
+<body>
+    <h1>Templates :: Show!!!</h1>
+    <br>
+
+    <hr>
+
+    <table border = "1">
+        <tr>
+            <td>아이디</td>
+            <td>이름</td>
+        </tr>
+        {% for item in data %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+{% comment %} 주석 {%%} 사이에는 파이썬 구문을 사용 {% endcomment %}

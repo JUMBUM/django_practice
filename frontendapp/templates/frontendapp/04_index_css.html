@@ -1,0 +1,36 @@
+{% load static %}
+
+<!dOCTYpe html>
+<html>
+    <head>
+        <title>04_index_css.html 페이지 입니다.</title>
+        <link href="{% static '/frontendapp/css/practice.css' %}" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <nav>
+            <a href="/frontend/index4">Home</a>
+            <a href="/frontend/blog4">Blog</a>
+            <a href="/frontend/about4">About Me</a>
+        </nav>
+
+        <hr>
+
+        <h1>첫번째 제목 크기</h1>
+        <h2>두번째 제목 크기</h2>
+        <h3>세번째 제목 크기</h3>
+        <h4>네번째 제목 크기</h4>
+        <h5>다섯번째 제목 크기</h5>
+
+        <hr>
+
+        <p>문단은 p태그를 이용하여 작성 합니다</p>
+
+        <hr>
+
+        <a href="https://www.google.com">Gogo google</a>
+        <hr>
+        <img src="{% static 'frontendapp/images/cat.jpg' %}" 
+                width="500" height="300">
+
+    </body>
+</html>

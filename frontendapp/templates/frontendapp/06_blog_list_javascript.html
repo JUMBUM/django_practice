@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        <title>04_blog_list.html 페이지 입니다.</title>
+        <link href="{% static '/frontendapp/css/practice.css' %}" rel="stylesheet" type="text/css">
+        <script type="text/javascript">
+            function doSomething(){           
+            a = document.getElementById('inputA').value;
+            b = document.getElementById('inputB').value;
+
+            document.getElementById('valueA').innerHTML = a;
+            document.getElementById('valueB').innerHTML = b;
+            document.getElementById('valueC').innerHTML = Number(a) + Number(b);
+            }
+
+            function getTime(){
+                alert(new Date())
+            }
+        </script>
+    </head>
+    <body>
+        <nav >
+            {% include 'frontendapp/include/nav.html' %}
+        </nav>
+
+        <hr>
+
+        <h1>Blog</h1>
+
+        <hr>
+        <button onclick="getTime()">현재시간 확인하기</button>
+
+
+
+
+        <hr>
+        <label>a</label>
+        <input id="inputA" value='정' onkeyup="doSomething()">
+        <label>b</label>
+        <input id="inputB" value='범' onkeyup="doSomething()">
+        <hr>
+
+        <p>
+            <span id="valueA">1</span> +
+            <span id="valueB">3</span> =
+            <span id="valueC">4</span> 입니다.
+        </p>
+
+
+
+        <p>블로그 페이지는 나중에 작성 합니다.</p>
+
+    </body>
+</html>

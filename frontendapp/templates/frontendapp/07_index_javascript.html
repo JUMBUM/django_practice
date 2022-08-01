@@ -1,0 +1,56 @@
+{% load static %}
+
+<!dOCTYpe html>
+<html>
+    <head>
+        <title>07_index_javascript.html 페이지 입니다.</title>
+        <link href="{% static '/frontendapp/css/practice.css' %}" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="{% static '/frontendapp/js/test.js' %}">
+        </script>
+    </head>
+    <body>
+        <nav>
+            {% include 'frontendapp/include/nav.html' %}
+        </nav>
+
+        <hr>
+
+        <h1>첫번째 제목 크기</h1>
+        <h2>두번째 제목 크기</h2>
+        <h3>세번째 제목 크기</h3>
+        <h4>네번째 제목 크기</h4>
+        <h5>다섯번째 제목 크기</h5>
+
+        <hr>
+        <button onclick="getTime()">현재시간 확인하기</button>
+
+
+
+
+        <hr>
+        <label>a</label>
+        <input id="inputA" value='정' onkeyup="doSomething()">
+        <label>b</label>
+        <input id="inputB" value='범' onkeyup="doSomething()">
+        <hr>
+
+        <p>
+            <span id="valueA">1</span> +
+            <span id="valueB">3</span> =
+            <span id="valueC">4</span> 입니다.
+        </p>
+
+
+
+
+        <p>문단은 p태그를 이용하여 작성 합니다</p>
+
+        <hr>
+
+        <a href="https://www.google.com">Gogo google</a>
+        <hr>
+        <img src="{% static 'frontendapp/images/cat.jpg' %}" 
+                width="500" height="300">
+
+    </body>
+</html>
