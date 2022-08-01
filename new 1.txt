@@ -1,0 +1,134 @@
+CREATE TABLE  member
+(  mem_id                VARCHAR2(15)   NOT NULL,   -- 회원ID  
+   mem_pass              VARCHAR2(15)   NOT NULL,   -- 비밀번호
+   mem_name              VARCHAR2(20)   NOT NULL,   -- 성명
+   mem_regno1            CHAR(6)        NOT NULL,   -- 주민등록번호앞6자리
+   mem_regno2            CHAR(7)        NOT NULL,   -- 주민등록번호뒤7자리
+   mem_bir               DATE,                      -- 생일
+   mem_zip               CHAR(7)        NOT NULL,   -- 우편번호
+   mem_add1              VARCHAR2(100)  NOT NULL,   -- 주소1
+   mem_add2              VARCHAR2(80)   NOT NULL,   -- 주소2
+   mem_hometel           VARCHAR2(14)   NOT NULL,   -- 집전화번호                                
+   mem_comtel            VARCHAR2(14)   NOT NULL,   -- 회사전화번호                              
+   mem_hp                VARCHAR2(15),              -- 이동전화
+   mem_mail              VARCHAR2(40)   NOT NULL,   -- E-mail주소
+   mem_job               VARCHAR2(40),              -- 직업
+   mem_like              VARCHAR2(40),              -- 취미
+   mem_memorial          VARCHAR2(40),              -- 기념일명
+   mem_memorialday       DATE,                      -- 기념일날짜
+   mem_mileage           NUMBER(10),                -- 마일리지              
+   mem_delete            VARCHAR2(1),               -- 삭제여부
+   CONSTRAINT pk_mem_id PRIMARY KEY (mem_id) 
+);
+ 
+
+mem_id
+mem_pass
+mem_name
+mem_regno1
+mem_regno2
+mem_bir
+mem_zip
+mem_add1
+mem_add2
+mem_hometel
+mem_comtel
+mem_hp
+mem_mail
+mem_job
+mem_like
+mem_memorial
+mem_memorialday
+mem_mileage
+mem_delete
+
+
+회원ID
+비밀번호
+성명
+주민등록번호앞6자리
+주민등록번호뒤7자리
+생일
+우편번호
+주소1
+주소2
+집전화번호
+회사전화번호
+이동전화
+E-mail주소
+직업
+취미
+기념일명
+기념일날짜
+마일리지
+삭제여부
+
+
+Select prod_name, (Case
+When (To_char(mem_bir,'yyyy')) >= 1940
+And (To_char(mem_bir,'yyyy')) < 1950 Then '40s'
+When (To_char(mem_bir,'yyyy')) >= 1950
+And (To_char(mem_bir,'yyyy')) < 1960 Then '50s'
+When (To_char(mem_bir,'yyyy')) >= 1960
+And (To_char(mem_bir,'yyyy')) < 1970 Then '60s'
+When (To_char(mem_bir,'yyyy')) >= 1970
+And (To_char(mem_bir,'yyyy')) < 1980 Then '70s'
+When (To_char(mem_bir,'yyyy')) >= 1980
+And (To_char(mem_bir,'yyyy')) < 1990 Then '80s'
+When (To_char(mem_bir,'yyyy')) >= 1990
+And (To_char(mem_bir,'yyyy')) < 2000 Then '90s'
+When (To_char(mem_bir,'yyyy')) >= 2000
+And (To_char(mem_bir,'yyyy')) < 2010 Then '00s'
+Else 'else'
+End) as 성별,
+Count((Case
+When (To_char(mem_bir,'yyyy')) >= 1940 Then '40s'
+When (To_char(mem_bir,'yyyy')) >= 1950 Then '50s'
+When (To_char(mem_bir,'yyyy')) >= 1960 Then '60s'
+When (To_char(mem_bir,'yyyy')) >= 1970 Then '70s'
+When (To_char(mem_bir,'yyyy')) >= 1980 Then '80s'
+When (To_char(mem_bir,'yyyy')) >= 1990 Then '90s'
+When (To_char(mem_bir,'yyyy')) >= 2000 Then '00s'
+Else 'else'
+End)) as buy_count
+,Round(avg(cart_qty)) as average_order,
+Count((Case
+When (To_char(mem_bir,'yyyy')) >= 1940 Then '40s'
+When (To_char(mem_bir,'yyyy')) >= 1950 Then '50s'
+When (To_char(mem_bir,'yyyy')) >= 1960 Then '60s'
+When (To_char(mem_bir,'yyyy')) >= 1970 Then '70s'
+When (To_char(mem_bir,'yyyy')) >= 1980 Then '80s'
+When (To_char(mem_bir,'yyyy')) >= 1990 Then '90s'
+When (To_char(mem_bir,'yyyy')) >= 2000 Then '00s'
+Else 'else'
+End))* Round(avg(cart_qty)) as total_order
+From prod
+    Left Outer Join cart
+        On(prod_id = cart_prod)
+    Left Outer Join member
+        On(mem_id = cart_member)
+Group by prod_name, (Case
+When (To_char(mem_bir,'yyyy')) >= 1940 Then '40s'
+When (To_char(mem_bir,'yyyy')) >= 1950 Then '50s'
+When (To_char(mem_bir,'yyyy')) >= 1960 Then '60s'
+When (To_char(mem_bir,'yyyy')) >= 1970 Then '70s'
+When (To_char(mem_bir,'yyyy')) >= 1980 Then '80s'
+When (To_char(mem_bir,'yyyy')) >= 1990 Then '90s'
+When (To_char(mem_bir,'yyyy')) >= 2000 Then '00s'
+Else 'else'
+End)
+Order by 성별 Desc, total_order Desc;
+
+
+
+Select prod_name, mem_like,
+Count(mem_like)
+,Round(avg(Nvl(cart_qty,0))) as average_order,
+Nvl(Count(mem_like)* Round(avg(cart_qty)),0) as total_order
+From prod
+    Left Outer Join cart
+        On(prod_id = cart_prod)
+    Left Outer Join member
+        On(mem_id = cart_member)
+Group by prod_name, mem_like
+Order by gender Desc, total_order Desc;

@@ -1,0 +1,26 @@
+<!Doctype html>
+<html>
+<head>
+    <title>장바구니 정보 전체 조회하기</title>
+</head>
+<body>
+    <h1>장바구니 전체 목록</h1>
+    <hr>
+    <table border="1">
+        <tr style="background: yellow">
+            <th>회원아이디</th>
+            <th>주문번호</th>
+            <th>상품코드</th>
+            <th>주문수량</th>
+        </tr>
+        {% for col in df %}
+        <tr>
+            {% for data in col %}
+            <td>{{data}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    {{df | safe}}
+</body>
+</html>
